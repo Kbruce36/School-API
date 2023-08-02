@@ -74,7 +74,7 @@ def department_list(request):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     elif request.method == 'GET':
         department = Department.objects.all()
-        serializer = StaffSerializer(department, many=True)
+        serializer = DepartmentSerializer(department, many=True)
         return Response(serializer.data)
 
 
@@ -89,7 +89,7 @@ def department_detail(request,pk):
         serializer = DepartmentSerializer(department, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data)
+        return Response(department.data)
     elif request.method == 'DELETE':
         department.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
