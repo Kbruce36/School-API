@@ -36,6 +36,32 @@ def staff_detail(request,pk):
         staff.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['POST','GET'])
+def student_list(request):
+    if request.method == 'POST':
+        serializer = StudentSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+    elif request.method == 'GET':
+        staff = Student.objects.all()
+        serializer = StudentSerializer(staff, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET', 'UPDATE', 'DELETE'])
+def student_detail(request,pk):
+    student = Student.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+    elif request.method == 'UPDATE':
+        serializer = StudentSerializer(student, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 # Departments Views
 
 @api_view(['POST','GET'])
