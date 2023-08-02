@@ -14,18 +14,18 @@
   
 
 # courses
-   name
+   courseName
    courseCode
    Department
    duration
     
 
 # departments
-    name
+    departmentName
     staff
     headOfDepartment
     coursesInDepartment
    
 # clubs
-   name
+   clubName
    headOfClub

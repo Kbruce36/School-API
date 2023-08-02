@@ -34,7 +34,7 @@
       [GET] https://www.schoolapi.com/staff
     # How to GET [A specific] staff member?
       [GET] https://www.schoolapi.com/staff/{id:str}
-      [GET] https://www.schoolapi.com/staff/SCH-STF-001#CLIENT
+      [GET] https://www.schoolapi.com/staff/001#CLIENT
 
     # How to PUT [A specific] staff member?
       [GET] https://www.schoolapi.com/staff/{id:str}
