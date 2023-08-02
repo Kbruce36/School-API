@@ -123,3 +123,32 @@ def club_detail(request,pk):
     elif request.method == 'DELETE':
         club.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+# course functions of school API
+@api_view(['POST','GET'])
+def course_list(request):
+    if request.method == 'POST':
+        serializer = CourseSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+    elif request.method == 'GET':
+        course = Course.objects.all()
+        serializer = CourseSerializer(course, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def course_detail(request,pk):
+    course = Course.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = CourseSerializer(course)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = CourseSerializer(course, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        course.delete()
+        return Response("Course deleted successfuly")
