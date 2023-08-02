@@ -1,0 +1,46 @@
+#Building a RESTAPI for a school management system:
+# Step 1: Identify resources
+  # staff
+  # students
+  # courses
+  # departments
+  # clubs
+
+# Step 2: Think in terms of CRUD Operations
+  # For each resource:
+    # How to create a Resource?
+    # How to Read [ALL] resources?
+    # How to Read [A specific resource]?
+    # How to Update [A specific] resource?
+    # How to delete [A specific] resource?
+
+# Step 3: Build the service to serve the resources:
+  # Django & DRF
+
+# Think in HTTP methods:
+    # How to POST a Resource?
+    # How to GET [ALL] resources?
+    # How to GET [A specific resource]?
+    # How to PUT [A specific] resource?
+    # How to DELETE [A specific] resource?
+
+# Creating end points:
+#[domain]/endpoints
+#https://www.schoolapi.com/endpoints
+  # staff:
+    # How to POST a staff member?
+      [POST] https://www.schoolapi.com/staff
+    # How to GET [ALL] staff member?
+      [GET] https://www.schoolapi.com/staff
+    # How to GET [A specific] staff member?
+      [GET] https://www.schoolapi.com/staff/{id:str}
+      [GET] https://www.schoolapi.com/staff/SCH-STF-001#CLIENT
+
+    # How to PUT [A specific] staff member?
+      [GET] https://www.schoolapi.com/staff/{id:str}
+      [GET] https://www.schoolapi.com/staff/SCH-STF-001#CLIENT
+    # How to DELETE [A specific] staff member?
+  # students
+  # courses
+  # departments
+  # clubs
