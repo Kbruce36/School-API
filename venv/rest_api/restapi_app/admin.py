@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import StaffMember,Student,Course,Department,Club
 
 # Register your models here.
 

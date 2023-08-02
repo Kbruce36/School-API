@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import *
+from restapi_app.models import StaffMember,Student,Course,Department,Club
 
 class StaffSerializer(serializers.ModelSerializer):
     class Meta:
