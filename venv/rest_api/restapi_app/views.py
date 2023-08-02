@@ -78,7 +78,6 @@ def department_list(request):
         return Response(serializer.data)
 
 
-
 @api_view(['GET', 'PUT', 'DELETE'])
 def department_detail(request,pk):
     department = Department.objects.get(pk=pk)
@@ -125,7 +124,7 @@ def club_detail(request,pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 
-# course functions of school API
+# school API course functions of school API
 @api_view(['POST','GET'])
 def course_list(request):
     if request.method == 'POST':
@@ -136,7 +135,6 @@ def course_list(request):
         course = Course.objects.all()
         serializer = CourseSerializer(course, many=True)
     return Response(serializer.data)
-
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def course_detail(request,pk):
