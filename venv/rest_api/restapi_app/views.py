@@ -7,7 +7,7 @@ from rest_framework import status
 
 # Create your views here.
 
-
+#Staff views
 @api_view(['POST','GET'])
 def staff_list(request):
     if request.method == 'POST':
@@ -36,6 +36,7 @@ def staff_detail(request,pk):
         staff.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# Student views
 @api_view(['POST','GET'])
 def student_list(request):
     if request.method == 'POST':
