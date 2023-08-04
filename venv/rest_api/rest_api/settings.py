@@ -131,7 +131,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'rest_api.urls.api_info',
-    # 'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.openapi.AutoSchema',
     'SECURITY_DEFINITIONS': {
         'api_key': {
             'type': 'apiKey',
@@ -140,13 +139,3 @@ SWAGGER_SETTINGS = {
         },
     },
 }
-
-# SWAGGER_SETTINGS = {
-#     'SECURITY_DEFINITIONS': {
-#         'api_key': {
-#             'type': 'apiKey',
-#             'in': 'header',
-#             'name': 'Authorization'
-#         }
-#     },
-# }
