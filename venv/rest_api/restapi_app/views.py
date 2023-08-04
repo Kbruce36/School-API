@@ -103,32 +103,35 @@ def department_detail(request,pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# # Clubs Views
-# @api_view(['POST','GET'])
-# def club_list(request):
-#     if request.method == 'POST':
-#         serializer = ClubSerializer(data = request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     elif request.method == 'GET':
-#         club = Club.objects.all()
-#         serializer = ClubSerializer(club, many=True)
-#         return Response(serializer.data)
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def club_detail(request,pk):
-#     club = Club.objects.get(pk=pk)
-#     if request.method == 'GET':
-#         serializer = ClubSerializer(club)
-#         return Response(serializer.data)
-#     elif request.method == 'PUT':
-#         serializer = ClubSerializer(club, data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data)
-#     elif request.method == 'DELETE':
-#         club.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+# Clubs Views
+@swagger_auto_schema(method='POST', request_body=ClubSerializer)
+@api_view(['POST','GET'])
+def club_list(request):
+    if request.method == 'POST':
+        serializer = ClubSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'GET':
+        club = Club.objects.all()
+        serializer = ClubSerializer(club, many=True)
+        return Response(serializer.data)
+
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=ClubSerializer)
+@api_view(['GET', 'PUT', 'DELETE'])
+def club_detail(request,pk):
+    club = Club.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = ClubSerializer(club)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = ClubSerializer(club, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        club.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     
 
 # # school API course functions of school API
