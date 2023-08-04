@@ -128,8 +128,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Swagger Configuration files
+
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'rest_api.urls.api_info',
+    # 'DEFAULT_AUTO_SCHEMA_CLASS': 'drf_yasg.openapi.AutoSchema',
     'SECURITY_DEFINITIONS': {
         'api_key': {
             'type': 'apiKey',

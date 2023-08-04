@@ -11,7 +11,7 @@ from drf_yasg.utils import swagger_auto_schema
 # Create your views here.
 
 # swagger
-@swagger_auto_schema(method=['POST','GET'], request_body=StaffSerializer)
+@swagger_auto_schema(method='POST', request_body=StaffSerializer)
 #Staff views
 @api_view(['POST','GET'])
 def staff_list(request):
@@ -26,8 +26,8 @@ def staff_list(request):
 
 
 # swagger
-@swagger_auto_schema(methods=['GET', 'PUT', 'DELETE'], request_body=StaffSerializer)
-@api_view(['GET', 'PUT', 'DELETE'])
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=StaffSerializer)
+@api_view(['GET','PUT','DELETE'])
 def staff_detail(request,pk):
     staff = StaffMember.objects.get(pk=pk)
     if request.method == 'GET':
@@ -42,7 +42,8 @@ def staff_detail(request,pk):
         staff.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# # Student views
+# Student views
+@swagger_auto_schema(method='POST', request_body=StudentSerializer)
 @api_view(['POST','GET'])
 def student_list(request):
     if request.method == 'POST':
@@ -54,20 +55,21 @@ def student_list(request):
         serializer = StudentSerializer(staff, many=True)
     return Response(serializer.data)
 
-# @api_view(['GET', 'UPDATE', 'DELETE'])
-# def student_detail(request,pk):
-#     student = Student.objects.get(pk=pk)
-#     if request.method == 'GET':
-#         serializer = StudentSerializer(student)
-#         return Response(serializer.data)
-#     elif request.method == 'UPDATE':
-#         serializer = StudentSerializer(student, data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data)
-#     elif request.method == 'DELETE':
-#         student.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=StudentSerializer)
+@api_view(['GET','PUT','DELETE'])
+def student_detail(request,pk):
+    student = Student.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = StudentSerializer(student, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
+    elif request.method == 'DELETE':
+        student.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # # Departments Views
