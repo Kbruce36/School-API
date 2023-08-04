@@ -17,7 +17,35 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# swagger openapi import
+from drf_yasg import openapi 
+from drf_yasg.views import get_schema_view
+from rest_framework import permissions
+from restapi_app import api_info
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('restapi_app.urls')),
+]
+
+
+# Swagger Configuration
+schema_view = get_schema_view(
+    openapi.Info(
+        title="SCHOOL DJANGO API WITH SWAGGER",
+        default_version='v1.0',
+        description="TEsting School Django API and Swagger",
+        terms_of_service="https://your-terms-of-bootcamp12-python.com/",
+        contact=openapi.Contact(email="teampy@gmail.com"),
+        license=openapi.License(name="License Bootcamp13 Team Python"), 
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),  # Set appropriate permissions here
+)
+
+# Include the Swagger and ReDoc URLs
+urlpatterns += [
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

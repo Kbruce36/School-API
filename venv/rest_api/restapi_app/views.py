@@ -5,8 +5,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+# Import for swagger auto schema for fields
+from drf_yasg.utils import swagger_auto_schema
+
 # Create your views here.
 
+# swagger
+@swagger_auto_schema(method='POST', request_body=StaffSerializer)
 #Staff views
 @api_view(['POST','GET'])
 def staff_list(request):
@@ -20,8 +25,9 @@ def staff_list(request):
     return Response(serializer.data)
 
 
-
-@api_view(['GET', 'PUT', 'DELETE'])
+# swagger
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=StaffSerializer)
+@api_view(['GET','PUT','DELETE'])
 def staff_detail(request,pk):
     staff = StaffMember.objects.get(pk=pk)
     if request.method == 'GET':
@@ -37,6 +43,7 @@ def staff_detail(request,pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 # Student views
+@swagger_auto_schema(method='POST', request_body=StudentSerializer)
 @api_view(['POST','GET'])
 def student_list(request):
     if request.method == 'POST':
@@ -48,13 +55,14 @@ def student_list(request):
         serializer = StudentSerializer(staff, many=True)
     return Response(serializer.data)
 
-@api_view(['GET', 'UPDATE', 'DELETE'])
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=StudentSerializer)
+@api_view(['GET','PUT','DELETE'])
 def student_detail(request,pk):
     student = Student.objects.get(pk=pk)
     if request.method == 'GET':
         serializer = StudentSerializer(student)
         return Response(serializer.data)
-    elif request.method == 'UPDATE':
+    elif request.method == 'PUT':
         serializer = StudentSerializer(student, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -63,8 +71,9 @@ def student_detail(request,pk):
         student.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Departments Views
 
+# # Departments Views
+@swagger_auto_schema(method='POST', request_body=DepartmentSerializer)
 @api_view(['POST','GET'])
 def department_list(request):
     if request.method == 'POST':
@@ -77,7 +86,7 @@ def department_list(request):
         serializer = DepartmentSerializer(department, many=True)
         return Response(serializer.data)
 
-
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=DepartmentSerializer)
 @api_view(['GET', 'PUT', 'DELETE'])
 def department_detail(request,pk):
     department = Department.objects.get(pk=pk)
@@ -93,8 +102,9 @@ def department_detail(request,pk):
         department.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-# Clubs Views
 
+# Clubs Views
+@swagger_auto_schema(method='POST', request_body=ClubSerializer)
 @api_view(['POST','GET'])
 def club_list(request):
     if request.method == 'POST':
@@ -107,7 +117,7 @@ def club_list(request):
         serializer = ClubSerializer(club, many=True)
         return Response(serializer.data)
 
-
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=ClubSerializer)
 @api_view(['GET', 'PUT', 'DELETE'])
 def club_detail(request,pk):
     club = Club.objects.get(pk=pk)
@@ -125,6 +135,7 @@ def club_detail(request,pk):
     
 
 # school API course functions of school API
+@swagger_auto_schema(method='POST', request_body=CourseSerializer)
 @api_view(['POST','GET'])
 def course_list(request):
     if request.method == 'POST':
@@ -136,6 +147,8 @@ def course_list(request):
         serializer = CourseSerializer(course, many=True)
     return Response(serializer.data)
 
+
+@swagger_auto_schema(methods=['PUT', 'DELETE'], request_body=ClubSerializer)
 @api_view(['GET', 'PUT', 'DELETE'])
 def course_detail(request,pk):
     course = Course.objects.get(pk=pk)
@@ -150,3 +163,8 @@ def course_detail(request,pk):
     elif request.method == 'DELETE':
         course.delete()
         return Response("Course deleted successfuly")
+
+
+# Swagger index file loading function
+def index(request):
+    return render(request, 'index.html')
