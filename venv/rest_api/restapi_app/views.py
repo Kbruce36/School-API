@@ -164,6 +164,7 @@ def course_detail(request,pk):
         course.delete()
         return Response("Course deleted successfuly")
 
+
 # Swagger index file loading function
 def index(request):
     return render(request, 'index.html')
