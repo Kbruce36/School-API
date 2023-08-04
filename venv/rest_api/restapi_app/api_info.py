@@ -6,6 +6,6 @@ api_info = openapi.Info(
     description="TEsting School Django API and Swagger",
     terms_of_service="https://your-terms-of-service-url.com/",
     contact=openapi.Contact(email="teampy@gmail.com"),
-    license=openapi.License(name="Your License"),        
+    license=openapi.License(name="Your License"),   
 )
 

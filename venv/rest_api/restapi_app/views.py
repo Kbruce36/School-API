@@ -73,32 +73,34 @@ def student_detail(request,pk):
 
 
 # # Departments Views
-# @api_view(['POST','GET'])
-# def department_list(request):
-#     if request.method == 'POST':
-#         serializer = DepartmentSerializer(data = request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
-#     elif request.method == 'GET':
-#         department = Department.objects.all()
-#         serializer = DepartmentSerializer(department, many=True)
-#         return Response(serializer.data)
+@swagger_auto_schema(method='POST', request_body=DepartmentSerializer)
+@api_view(['POST','GET'])
+def department_list(request):
+    if request.method == 'POST':
+        serializer = DepartmentSerializer(data = request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    elif request.method == 'GET':
+        department = Department.objects.all()
+        serializer = DepartmentSerializer(department, many=True)
+        return Response(serializer.data)
 
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def department_detail(request,pk):
-#     department = Department.objects.get(pk=pk)
-#     if request.method == 'GET':
-#         serializer = DepartmentSerializer(department)
-#         return Response(serializer.data)
-#     elif request.method == 'PUT':
-#         serializer = DepartmentSerializer(department, data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(department.data)
-#     elif request.method == 'DELETE':
-#         department.delete()
-#         return Response(status=status.HTTP_204_NO_CONTENT)
+@swagger_auto_schema(methods=['PUT','DELETE'], request_body=DepartmentSerializer)
+@api_view(['GET', 'PUT', 'DELETE'])
+def department_detail(request,pk):
+    department = Department.objects.get(pk=pk)
+    if request.method == 'GET':
+        serializer = DepartmentSerializer(department)
+        return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = DepartmentSerializer(department, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(department.data)
+    elif request.method == 'DELETE':
+        department.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 # # Clubs Views
