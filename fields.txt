@@ -1,0 +1,31 @@
+# Staff:
+  id 
+   firstName
+   secondName
+   gender
+   age
+   email
+    
+# students
+   id 
+   firstName
+   secondName
+   gender
+  
+
+# courses
+   courseName
+   courseCode
+   Department
+   duration
+    
+
+# departments
+    departmentName
+    staff
+    headOfDepartment
+    coursesInDepartment
+   
+# clubs
+   clubName
+   headOfClub
